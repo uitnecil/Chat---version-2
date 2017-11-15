@@ -12,6 +12,7 @@
  *        [allowControlToBeMoved]="checkboxStatus"
  *        (coordinates)="logMe($event)"
  *        (status)="logMe($event)"
+ *        > Move Me </div>
  */
 
 import { Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';

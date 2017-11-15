@@ -1,0 +1,99 @@
+.chat-window-container {
+  width: 400px;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 4px 4px 0 0;
+}
+
+.chat-window-container .chat-window-header {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+
+  border-radius: 4px 4px 0 0;
+  background-color: dodgerblue;
+  color: white;
+  padding: 3px;
+
+}
+
+.chat-window-header img {
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  margin: 0 4px 0 0;
+}
+
+.chat-window-header .chat-window-title-text {
+  font-size: large;
+  font-weight: bold;
+}
+
+.chat-window-messages {
+  max-height: 200px;
+  min-height: 150px;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.chat-window-input {
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  align-content: stretch;
+  justify-content:flex-start;
+
+  padding: 5px;
+  border-top: 1px solid lightgray;
+  background-color: lightblue;
+}
+.text-input {
+  flex: 1 1 100%;
+  height: 25px;
+  border: 1px solid transparent;
+  border-radius: 5px 0 0 5px;
+  padding: 5px;
+  margin: 2px 0 2px 2px ;
+  outline: none;
+}
+
+.text-input:not(focus) {
+  border: 1px solid gray;
+}
+
+.text-input:focus {
+  border-color: dodgerblue;
+}
+
+.chat-window-input button {
+  border: 1px solid dodgerblue;
+  background: dodgerblue;
+  margin: 2px 2px 2px 0;
+  color: white;
+  border-radius: 0 5px 5px 0;
+}
+
+.message-body {
+  display: flex;
+  flex-flow: row nowrap;
+  align-content: flex-start;
+  align-items: flex-start;
+  justify-content:flex-start;
+  margin: 3px;
+}
+
+.message-body .avatar {
+  width: 50px;
+  height: 50px;
+  margin: 4px;
+}
+
+.less-visible {
+  color: gray;
+}
+
+.author {
+  font-size: medium;
+  font-weight: bold;
+}

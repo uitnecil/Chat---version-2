@@ -1,0 +1,22 @@
+<div class="chat-window-container">
+  <div class="chat-window-header">
+    <img class="chat-window-img" [src]="currentThread.avatarSrc" alt="">
+    <div class="chat-window-title-text"> {{currentThread.name}}</div>
+  </div>
+
+  <div class="chat-window-messages" #scrollable>
+    <div class="message-body" *ngFor="let message of currentThreadMessages">
+      <img class="avatar" [src]="message.author.avatarSrc" alt="">
+      <div>
+        <span class="author">{{message.author.name}}</span>  <span class="less-visible">&#8226; {{message.sentAt | fromNow: refreshViewTimeCounter}}</span>
+
+        <div>{{message.text}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-window-input">
+    <input autofocus type='text' class="text-input" #inputMessage (keydown.enter)="sendMessage(inputMessage.value); inputMessage.value=''">
+    <button (click)="sendMessage(inputMessage.value); inputMessage.value='';">Send</button>
+  </div>
+</div>

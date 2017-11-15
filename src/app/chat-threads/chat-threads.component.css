@@ -1,0 +1,74 @@
+.main-container {
+  width: 500px;
+  display: flex;
+  flex-flow: column wrap;
+  align-content: flex-start;
+  align-items: stretch;
+  justify-content: flex-start;
+  user-select: none;
+}
+
+.threads-header {
+  background-color: dodgerblue;
+  color: white;
+  border-radius: 3px 3px 0 0;
+  padding: 5px;
+  font-family: "Abecedario", "Comic Sans MS", "Courier New", "serif";
+  font-size: x-large;
+}
+
+.threads-container {
+  border: 1px solid darkgray;
+}
+
+.thread {
+  display: flex;
+  flex-flow: row nowrap;
+  /*align-items: center;*/
+  /*align-content: center;*/
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.thread-image {
+  width: 75px;
+  height: 75px;
+  /*display: block;*/
+  margin: 5px;
+  padding: 0;
+  flex: 0 0 auto;
+}
+
+.thread-image img {
+  width: 100%;
+  height: auto;
+  /*border: 1px solid red;*/
+  margin: 0;
+  padding: 0;
+}
+
+.thread-text {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: flex-start;
+}
+
+.notSelected {
+  /*border-right: 1px dotted transparent;*/
+  /*border-bottom: 1px dotted transparent;*/
+  /*border-radius: 0 0 0 5px;*/
+
+}
+
+.selected {
+  /*border-right: 1px dotted gray;*/
+  /*border-bottom: 1px dotted gray;*/
+  /*border-radius: 0 0 0 5px;*/
+  /*background-color: azure;*/
+}
+
+.less-visible {
+  color: gray;
+}

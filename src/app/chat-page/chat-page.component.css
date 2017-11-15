@@ -1,0 +1,21 @@
+.click-able {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transform: translate(0, -100%);
+
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content:center;
+
+  width: 300px;
+  height: 200px;
+  background-color: cornflowerblue;
+  border: 1px solid black;
+  transition: all 0.3s ease-in-out;
+}
+
+.click-able:active {
+  background-color: pink;
+}

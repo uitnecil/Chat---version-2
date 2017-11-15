@@ -1,0 +1,21 @@
+<div class="main-container">
+  <div class="threads-header">Main Window</div>
+  <div class="threads-container">
+    <div *ngFor="let thread of threads | async" (click)="setCurrentThread(thread)">
+      <div [ngClass]="{'thread': true, 'selected': (thread.id === this.currentThread.id), 'notSelected': !(thread.id === this.currentThread.id)}">
+        <div class="thread-image">
+          <img class="thread-image" [src]="thread.avatarSrc" alt="">
+        </div>
+        <div class="thread-text">
+          <div>
+            <strong> {{thread.name}} </strong><span *ngIf="thread.id === this.currentThread.id">&#8226;</span>
+          </div>
+          <span class="less-visible">Last activity {{thread.lastMessage.sentAt | fromNow: refreshViewTimeCounter}}</span>
+          <div>
+            {{thread.lastMessage.text}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

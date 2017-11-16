@@ -12,9 +12,18 @@
  *        [allowControlToBeMoved]="checkboxStatus"
  *        (coordinates)="logMe($event)"
  *        (status)="logMe($event)"
+ *
+ *   16.11.2017:
+ *   - setting grab area to a child element having custom class '.window-header'
+ *      - grabbing this child element will move the entire parent element, the rest of the parent element will not react to drag and drop.
+ *      - if such a child element is not found, you can move the parent element by grabbing anywhere on it.
  */
 
-import { Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit, ContentChild, Directive, ElementRef, EventEmitter, Input, OnDestroy,
+  Output
+} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/mergeMap';
@@ -25,7 +34,7 @@ import 'rxjs/add/operator/takeUntil';
 @Directive({
   selector: '[appMoveMe]'
 })
-export class MoveMeDirective implements OnDestroy {
+export class MoveMeDirective implements OnDestroy, AfterContentInit {
   @Output('coordinates') private coordinates: EventEmitter<{ x: number, y: number }> = new EventEmitter<{ x: number, y: number }>();
   @Output('status') private status: EventEmitter<any> = new EventEmitter<any>();
 
@@ -38,17 +47,28 @@ export class MoveMeDirective implements OnDestroy {
   initialWindowX: number;
   initialWindowY: number;
 
-  constructor(el: ElementRef) {
-    this.setInitialStylingForMovement(el);
+  private dragNDropGrabArea;
 
-    const mouseDown$ = Observable.fromEvent(el.nativeElement, 'mousedown');
+
+  constructor(private el: ElementRef) { }
+
+  ngAfterContentInit() {
+
+    // if an element having a custom class .window-header is found than that element will allow by dragging it to drag the entire window
+    // otherwise you can move the window by grabbing anywhere on it
+    const windowHeader = this.el.nativeElement.querySelector('.window-header');
+    this.dragNDropGrabArea = windowHeader ? windowHeader : this.el.nativeElement;
+
+    this.setInitialStylingForMovement(this.el);
+
+    const mouseDown$ = Observable.fromEvent(this.dragNDropGrabArea, 'mousedown');
     const mouseUp$ = Observable.fromEvent(document, 'mouseup');
     const mouseMove$ = Observable.fromEvent(document, 'mousemove');
 
     const dragNDrop$ = mouseDown$
       .mergeMap((event: MouseEvent) => {
-        this.saveWindowCornerToMouseOffsets(el, event);
-        this.saveWindowOffsets(el);
+        this.saveWindowCornerToMouseOffsets(this.el, event);
+        this.saveWindowOffsets(this.el);
         this.status.emit('mousedown');
 
         return mouseMove$
@@ -58,12 +78,12 @@ export class MoveMeDirective implements OnDestroy {
             ev.preventDefault();
             return ev;
           })
-          .do(() => this.styleMovingWindow(el, this.status))
+          .do(() => this.styleMovingWindow(this.el, this.status))
           .takeUntil(mouseUp$
             .do(() => {
                 this.status.emit('mouseup');
-                this.emitValues(el);
-                this.unStyleAfterMovingWindow(el);
+                this.emitValues(this.el);
+                this.unStyleAfterMovingWindow(this.el);
               }
             ));
       });
@@ -71,7 +91,7 @@ export class MoveMeDirective implements OnDestroy {
     this.subscription = dragNDrop$
       .subscribe(
         // next
-        (event: MouseEvent) => this.moveElement(el, event.clientX + this.initialX, event.clientY + this.initialY),
+        (event: MouseEvent) => this.moveElement(this.el, event.clientX + this.initialX, event.clientY + this.initialY),
         // error
         console.log,
         // completion

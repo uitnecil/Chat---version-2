@@ -44,7 +44,7 @@ export class MoveMeDirective implements OnDestroy, AfterContentInit {
   initialWindowX: number;
   initialWindowY: number;
 
-  private dragNDropGrabArea;
+  private dragNDropGrabArea: HTMLElement;
 
 
   constructor(private el: ElementRef) {

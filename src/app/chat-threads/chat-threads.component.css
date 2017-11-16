@@ -13,8 +13,9 @@
   color: white;
   border-radius: 3px 3px 0 0;
   padding: 5px;
-  font-family: "Abecedario", "Comic Sans MS", "Courier New", "serif";
-  font-size: x-large;
+  /*font-family: "Abecedario", "Comic Sans MS", "Courier New", "serif";*/
+  font-size: larger;
+  font-weight: bold;
 }
 
 .threads-container {

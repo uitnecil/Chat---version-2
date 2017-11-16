@@ -1,5 +1,5 @@
 <div class="main-container">
-  <div class="threads-header">Main Window</div>
+  <div class="threads-header">Opened Threads</div>
   <div class="threads-container">
     <div *ngFor="let thread of threads | async" (click)="setCurrentThread(thread)">
       <div [ngClass]="{'thread': true, 'selected': (thread.id === this.currentThread.id), 'notSelected': !(thread.id === this.currentThread.id)}">

@@ -12,6 +12,7 @@
  *        [allowControlToBeMoved]="checkboxStatus"
  *        (coordinates)="logMe($event)"
  *        (status)="logMe($event)"
+ *        > Move Me </div>
  *
  *   16.11.2017:
  *   - setting grab area to a child element having custom class '.window-header'

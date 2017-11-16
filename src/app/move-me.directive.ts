@@ -20,11 +20,7 @@
  *      - if such a child element is not found, you can move the parent element by grabbing anywhere on it.
  */
 
-import {
-  AfterContentInit,
-  AfterViewInit, ContentChild, Directive, ElementRef, EventEmitter, Input, OnDestroy,
-  Output
-} from '@angular/core';
+import { AfterContentInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/mergeMap';
@@ -51,7 +47,8 @@ export class MoveMeDirective implements OnDestroy, AfterContentInit {
   private dragNDropGrabArea;
 
 
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef) {
+  }
 
   ngAfterContentInit() {
 

@@ -34,24 +34,18 @@ import 'rxjs/add/operator/takeUntil';
 export class MoveMeDirective implements OnDestroy, AfterContentInit {
   @Output('coordinates') private coordinates: EventEmitter<{ x: number, y: number }> = new EventEmitter<{ x: number, y: number }>();
   @Output('status') private status: EventEmitter<any> = new EventEmitter<any>();
-
   @Input('allowControlToBeMoved') public allowControlToBeMoved = true;
 
-  public subscription: Subscription;
-  initialX: number;
-  initialY: number;
-
-  initialWindowX: number;
-  initialWindowY: number;
-
+  private subscription: Subscription;
+  private initialX: number;
+  private initialY: number;
+  private initialWindowX: number;
+  private initialWindowY: number;
   private dragNDropGrabArea: HTMLElement;
 
-
-  constructor(private el: ElementRef) {
-  }
+  constructor(private el: ElementRef) {}
 
   ngAfterContentInit() {
-
     // if an element having a custom class .window-header is found than that element will allow by dragging it to drag the entire window
     // otherwise you can move the window by grabbing anywhere on it
     const windowHeader = this.el.nativeElement.querySelector('.window-header');
